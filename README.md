@@ -8,18 +8,26 @@ You will need [Leiningen][] 2.0.0 or above installed.
 
 [leiningen]: https://github.com/technomancy/leiningen
 
-## Running
+## Running locally
 
 To start a web server for the application, run:
 
     lein ring server
 
-## Building
+## Building and running in Docker
 
 ```
 lein ring uberjar
 docker build -t futupeople .
-docker run -p 3000:3000 futupeople
+docker run -p 8000:8000 futupeople
+```
+
+## Deploy to FutuSwarm
+
+```
+docker build -t futurice/futupeople:v1 .
+playswarm image:push -i futurice/futupeople -t v1
+playswarm app:deploy -i futurice/futupeople -t v1 -n futupeople
 ```
 
 ## License
