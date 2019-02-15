@@ -7,6 +7,7 @@
                  [ring/ring-defaults "0.3.2"]]
   :plugins [[lein-ring "0.12.4"]]
   :ring {:handler futupeople.handler/app}
+  :uberjar-name "futupeople.jar"
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.2"]]}})

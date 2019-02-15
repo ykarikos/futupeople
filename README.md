@@ -14,6 +14,14 @@ To start a web server for the application, run:
 
     lein ring server
 
+## Building
+
+```
+lein ring uberjar
+docker build -t futupeople .
+docker run -p 3000:3000 futupeople
+```
+
 ## License
 
 Copyright © 2019 FIXME
