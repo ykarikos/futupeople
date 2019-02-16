@@ -5,7 +5,8 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [compojure "1.6.1"]
                  [ring/ring-defaults "0.3.2"]
-                 [clj-http "3.9.1"]]
+                 [clj-http "3.9.1"]
+                 [ring/ring-codec "1.1.1"]]
   :plugins [[lein-ring "0.12.4"]]
   :ring {:handler futupeople.handler/app}
   :uberjar-name "futupeople.jar"

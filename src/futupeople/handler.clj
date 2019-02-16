@@ -3,12 +3,17 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.middleware.cookies :refer [wrap-cookies]]
-            [clj-http.client :as client]))
+            [clj-http.client :as client]
+            [ring.util.codec :refer [url-encode]]))
+
+(def auth-cookie-name "auth_pubtkt")
 
 (defn- get-auth-cookie [request]
   (-> request
       :cookies
-      (get "auth_pubtkt")))
+      (get auth-cookie-name)
+      :value
+      url-encode))
 
 (def url "https://reports.app.futurice.com/futuqu/rada/people")
 
@@ -17,7 +22,7 @@
     (if (nil? auth-cookie)
       (route/not-found "Cookie missing")
       (let [response (client/get url
-                       {:cookies {"auth_pubtkt" auth-cookie}})]
+                       {:cookies {auth-cookie-name {:value auth-cookie}}})]
         {:headers (:headers response)
          :body (:body response)}))))
 
