@@ -3,33 +3,26 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.middleware.cookies :refer [wrap-cookies]]
-            [clj-http.client :as client]
+            [futupeople.people :refer [get-summary]]
             [ring.util.codec :refer [url-encode]]))
 
 (def auth-cookie-name "auth_pubtkt")
 
 (defn- get-auth-cookie [request]
-  (-> request
-      :cookies
-      (get auth-cookie-name)
-      :value
-      url-encode))
-
-(def url "https://reports.app.futurice.com/futuqu/rada/people")
+  (let [cookie (-> request
+                   :cookies
+                   (get auth-cookie-name))]
+    (when cookie
+      {auth-cookie-name {:value (-> cookie :value url-encode)}})))
 
 (defn- get-people [request]
   (let [auth-cookie (get-auth-cookie request)]
     (if (nil? auth-cookie)
-      (route/not-found "Cookie missing")
-      (let [response (client/get url
-                       {:cookies {auth-cookie-name {:value auth-cookie}}})]
-        {:headers (:headers response)
-         :body (:body response)}))))
+      (route/not-found "Auth cookie missing")
+      (get-summary auth-cookie))))
 
 (defroutes app-routes
-  (GET "/" req (str "Hello Futurice on " (java.util.Date.)
-                     " '" (get-auth-cookie req) "'"))
-  (GET "/people" req (get-people req))
+  (GET "/" req (get-people req))
   (route/not-found "Not Found"))
 
 (def app
