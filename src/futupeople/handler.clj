@@ -2,6 +2,7 @@
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.cookies :refer [wrap-cookies]]
             [futupeople.people :refer [get-summary]]
             [ring.util.codec :refer [url-encode]]))
@@ -27,5 +28,6 @@
 
 (def app
   (-> app-routes
+    (wrap-resource "public")
     (wrap-defaults site-defaults)
     (wrap-cookies)))

@@ -7,21 +7,17 @@
 
 ; TODO
 ; Caching
-; create summary data from json
-; Get url via an env variable
 
 (defn- get-frequencies
   "Get frequencies from `people` with keyword `key` (mapped with `f`)"
   ([people key]
    (->> people
         (map key)
-        (map keyword)
         frequencies))
   ([people key f]
    (->> people
         (map key)
         (map f)
-        (map keyword)
         frequencies)))
 
 (defn- parse-data [response]

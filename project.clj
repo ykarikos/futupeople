@@ -8,7 +8,8 @@
                  [clj-http "3.9.1"]
                  [ring/ring-codec "1.1.1"]
                  [org.clojure/data.json "0.2.6"]
-                 [environ "1.1.0"]]
+                 [environ "1.1.0"]
+                 [hiccup "1.0.5"]]
   :plugins [[lein-ring "0.12.4"]]
   :ring {:handler futupeople.handler/app}
   :uberjar-name "futupeople.jar"
