@@ -1,6 +1,6 @@
 # futupeople
 
-FIXME
+Calculate live summary from all [Futurice](https://futurice.com/) people. It is running at https://futupeople.play.futurice.com/
 
 ## Prerequisites
 
@@ -36,6 +36,8 @@ playswarm image:push -i futurice/futupeople -t $TAG
 playswarm app:deploy -i futurice/futupeople -t $TAG -n futupeople
 ```
 
+More info on FutuSwarm here: https://futuswarm-mainpage.play.futurice.com/
+
 ## License
 
-Copyright © 2019 FIXME
+Licensed with [MIT License](LICENSE).

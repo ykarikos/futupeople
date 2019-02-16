@@ -1,6 +1,6 @@
 (defproject futupeople "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Calculate summary from all Futurice people"
+  :url "https://futupeople.play.futurice.com/"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [compojure "1.6.1"]

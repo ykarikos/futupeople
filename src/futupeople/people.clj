@@ -50,5 +50,9 @@
               (chart "Tribes" (:tribes people-data) (:count people-data))
               (chart "Roles" (:roles people-data) (:count people-data))
               (chart "Starting year" (:hire-years people-data) (:count people-data))]]
-            [:p {:style "padding-top: 70px;"} "Source: "
-             [:a {:href (env :people-list)} "Personio"]]]])))
+            [:p {:style "padding-top: 70px;"}
+             "Data Source: "
+             [:a {:href (env :people-list)} "Personio"]]
+            [:p
+             "Source code: "
+             [:a {:href "https://github.com/ykarikos/futupeople"} "https://github.com/ykarikos/futupeople"]]]])))
