@@ -1,8 +1,9 @@
 (ns futupeople.data
   (:require [clj-http.client :as client]
-            [clojure.data.json :as json]))
+            [clojure.data.json :as json]
+            [environ.core :refer [env]]))
 
-(def url "https://reports.app.futurice.com/futuqu/rada/people")
+(def url (env :people-list))
 
 ; TODO
 ; Caching
