@@ -3,4 +3,4 @@
 
 (defn get-summary [auth-cookie]
   (let [people-data (get-people-data auth-cookie)]
-    people-data))
+    (str people-data)))
