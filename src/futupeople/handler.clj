@@ -5,7 +5,7 @@
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.cookies :refer [wrap-cookies]]
             [futupeople.people :refer [get-summary]]
-            [ring.util.codec :refer [url-encode]]))
+            [ring.util.codec :refer [form-encode]]))
 
 (def auth-cookie-name "auth_pubtkt")
 
@@ -14,7 +14,7 @@
                    :cookies
                    (get auth-cookie-name))]
     (when cookie
-      {auth-cookie-name {:value (-> cookie :value url-encode)}})))
+      {auth-cookie-name {:value (-> cookie :value form-encode)}})))
 
 (defn- get-people [request]
   (let [auth-cookie (get-auth-cookie request)]

@@ -33,11 +33,15 @@
      :tribes (get-frequencies active :tribe)
      :roles (get-frequencies active :role)}))
 
+(defn- content-type [response]
+  (-> response
+      :headers
+      (get "Content-Type")))
+
 (defn- ok-response? [response]
   (and (= 200 (:status response))
        (-> response
-           :headers
-           (get "Content-Type")
+           content-type
            (.startsWith "application/json"))))
 
 (defn get-people-data [auth-cookie]
@@ -45,4 +49,6 @@
                    {:cookies auth-cookie})]
     (if (ok-response? response)
       (parse-data response)
-      {})))
+      (do
+        (println "Response not good:" (:status response) (content-type response))
+        {}))))

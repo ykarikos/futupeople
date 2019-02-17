@@ -1,6 +1,6 @@
 (ns futupeople.people
   (:require [futupeople.data :refer [get-people-data]]
-            [clojure.string :refer [replace]]
+            [clojure.string :as s]
             [hiccup.core :refer [html]]
             [environ.core :refer [env]]))
 
@@ -26,7 +26,7 @@
    [:ul {:class "chart-horiz"}
     (for [key (-> data keys sort)]
       (let [value (get data key)
-            key-title (replace key " " "&nbsp;")
+            key-title (s/replace key " " "&nbsp;")
             p (->> sum float (/ value) (* 170) int)]
         [:li {:class "chart-bar" :style (str "width: " p "%")}
          [:span {:class "chart-label"}
