@@ -42,7 +42,13 @@
                     :media "all"}]]
            [:body
             [:h1 "Futupeople"]
-            [:p "Number of active people: " (:count people-data)]
+            [:ul
+             [:li "Number of active people: "
+              (:count people-data)]
+             [:li "Number of supervisors: "
+              (:supervisors-count people-data)]
+             [:li "Number of expats: "
+              (:expat-count people-data)]]
             [:div {:class "top"}
              lines
              [:div {:class "charts"}
@@ -50,8 +56,18 @@
               (chart "Tribes" (:tribes people-data) (:count people-data))
               (chart "Roles" (:roles people-data) (:count people-data))
               (chart "Starting year" (:hire-years people-data) (:count people-data))]]
-            [:p {:style "padding-top: 70px;"}
-             "Data Source: "
+            [:h2 {:style "padding-top: 90px;"}
+             "Supervisors' team sizes"]
+            [:ul
+             [:li "Minimum (number of supervisees): " (-> people-data :supervisees :min)]
+             [:li "Maximum: " (-> people-data :supervisees :max)]
+             [:li "Median: " (-> people-data :supervisees :median)]]
+            [:h2 "Contract types"]
+            [:ul
+             (for [contract (:contract-types people-data)]
+               [:li (key contract) ": " (val contract)])]
+            [:hr]
+            [:p "Data Source: "
              [:a {:href (env :people-list)} "Personio"]]
             [:p
              "Source code: "
